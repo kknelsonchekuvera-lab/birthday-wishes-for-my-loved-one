@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Ananthika! ❤️</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              300: '#fda4af',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+            },
+            gold: {
+              400: '#facc15',
+              500: '#eab308',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            cursive: ['Dancing Script', 'cursive'],
+            romantic: ['Great Vibes', 'cursive']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fff0f3;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fda4af;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #f43f5e;
+    }
+
+    /* Glassmorphism Styles */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 182, 193, 0.4);
+    }
+    
+    .glass-dark {
+      background: rgba(26, 10, 18, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    /* Envelope Animation */
+    .envelope-wrapper {
+      perspective: 1000px;
+    }
+
+    /* Card 3D Flip Effects */
+    .flip-card {
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    /* Fix mirrored back-face text when card is flipped */
+    .flip-card.flipped .flip-card-back {
+      transform: rotateY(0deg);
+    }
+
+    /* Background Canvas */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow Effect */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(244, 63, 94, 0.3); }
+      50% { box-shadow: 0 0 28px rgba(244, 63, 94, 0.7); }
+    }
+    .pulse-glow {
+      animation: pulseGlow 3s infinite;
+    }
+
+    /* Scratch Canvas */
+    #scratchCanvas {
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* Candle Flame Animation */
+    .flame {
+      animation: flicker 1s infinite alternate;
+      transform-origin: center bottom;
+    }
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      20% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+      40% { transform: scale(0.95) rotate(-1deg); opacity: 0.8; }
+      60% { transform: scale(1.05) rotate(1deg); opacity: 0.95; }
+      80% { transform: scale(0.98) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(1.02) rotate(2deg); opacity: 1; }
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-rose-50 via-pink-100 to-rose-200 min-h-screen text-slate-800 font-sans relative overflow-x-hidden pb-24">
+
+  <canvas id="bgCanvas"></canvas>
+
+  <header class="fixed top-3 left-0 right-0 z-50 px-4 max-w-4xl mx-auto">
+    <div class="glass-card rounded-2xl p-3 shadow-lg flex items-center justify-between border border-rose-200">
+      <div class="flex items-center space-x-3">
+        <button id="playBtn" type="button" class="w-11 h-11 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 text-white flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-all">
+          <i id="playIcon" class="fas fa-play text-sm ml-0.5"></i>
+        </button>
+        <div class="overflow-hidden max-w-[160px] sm:max-w-[240px]">
+          <h4 class="font-bold text-xs sm:text-sm text-rose-900 truncate">Nee Kavithaigala ❤️</h4>
+          <p class="text-[10px] sm:text-xs text-rose-600 truncate">Maragatha Naanayam • Pradeep Kumar</p>
+        </div>
+      </div>
+
+      <!-- Audio Controls -->
+      <div class="flex items-center space-x-2">
+        <button id="openMusicModalBtn" type="button" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-pink-500 text-white hover:bg-pink-600 transition flex items-center space-x-1 shadow-sm">
+          <i class="fas fa-sliders-h text-xs"></i>
+          <span>Change Music</span>
+        </button>
+        <button id="openVideoModalBtn" type="button" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-500 text-white hover:bg-rose-600 transition flex items-center space-x-1 shadow-sm">
+          <i class="fab fa-youtube text-xs"></i>
+          <span>Watch Song</span>
+        </button>
+        <button id="lyricsBtn" type="button" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-100 text-rose-700 hover:bg-rose-200 transition">
+          <i class="fas fa-music mr-1"></i> Lyrics
+        </button>
+        <button id="muteBtn" type="button" class="w-8 h-8 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center hover:bg-rose-100 transition">
+          <i id="muteIcon" class="fas fa-volume-up text-xs"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Music Selector Modal -->
+    <div id="musicModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="glass-dark rounded-3xl p-5 sm:p-6 max-w-md w-full border border-rose-500/30 relative text-white space-y-4 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-rose-800/60 pb-3">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-compact-disc text-rose-400 text-xl animate-spin"></i>
+            <h3 class="font-cursive text-xl text-rose-300 font-bold">Change Background Music</h3>
+          </div>
+          <button id="closeMusicModal" type="button" class="w-8 h-8 rounded-full bg-rose-600/80 text-white flex items-center justify-center hover:bg-rose-600 transition">&times;</button>
+        </div>
+
+        <!-- Option 1: Preset Songs -->
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-rose-300 uppercase tracking-wider block">1. Select Preset Song</label>
+          <div class="grid grid-cols-1 gap-1.5">
+            <button onclick="changeAudioSource('nee_kavithaigala.mp3', 'Nee Kavithaigala ❤️', 'Maragatha Naanayam • Pradeep Kumar')" class="p-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800/50 text-left text-xs transition flex justify-between items-center">
+              <div>
+                <div class="font-bold text-rose-200">Nee Kavithaigala</div>
+                <div class="text-[10px] text-slate-400">Maragatha Naanayam</div>
+              </div>
+              <i class="fas fa-music text-rose-400"></i>
+            </button>
+            <button onclick="changeAudioSource('https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-ambient-112199.mp3', 'Romantic Acoustic Melody ❤️', 'Instrumental Romantic Tune')" class="p-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800/50 text-left text-xs transition flex justify-between items-center">
+              <div>
+                <div class="font-bold text-rose-200">Romantic Acoustic Melody</div>
+                <div class="text-[10px] text-slate-400">Instrumental Track</div>
+              </div>
+              <i class="fas fa-heart text-rose-400"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Option 2: Upload local audio file -->
+        <div class="space-y-2 pt-1 border-t border-rose-800/50">
+          <label class="text-xs font-bold text-rose-300 uppercase tracking-wider block">2. Play Song from Your Device</label>
+          <input type="file" id="localAudioInput" accept="audio/*" class="block w-full text-xs text-rose-200 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-700 cursor-pointer">
+        </div>
+
+        <!-- Option 3: Custom Audio URL -->
+        <div class="space-y-2 pt-1 border-t border-rose-800/50">
+          <label class="text-xs font-bold text-rose-300 uppercase tracking-wider block">3. Play from Direct MP3 Web Link</label>
+          <div class="flex space-x-2">
+            <input type="url" id="customAudioUrl" placeholder="https://example.com/song.mp3" class="w-full bg-slate-900/80 rounded-xl px-3 py-2 text-xs border border-rose-800 focus:outline-none focus:border-rose-400 text-white">
+            <button id="applyUrlBtn" type="button" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 rounded-xl text-xs font-bold text-white transition whitespace-nowrap">Play Link</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lyrics Drawer Popup -->
+    <div id="lyricsDrawer" class="hidden mt-2 glass-dark text-white rounded-2xl p-4 shadow-xl border border-rose-500/30 max-h-56 overflow-y-auto text-center text-sm space-y-2">
+      <div class="flex justify-between items-center text-xs text-rose-300 pb-1 border-b border-rose-800">
+        <span>"Nee Kavithaigala" Lyrics</span>
+        <button id="closeLyrics" type="button" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+      <p class="italic text-rose-200 text-xs">"Nee kavithaigala... illai kaviyangala...<br>Unnodu vazhum ovvoru nodiyum siragugala..."</p>
+      <p class="text-xs text-slate-300">
+        You are the poetry that fills my life with endless beauty, Ananthika.<br>Every second with you feels like flying with wings.
+      </p>
+      <p class="text-xs text-rose-300">
+        நீ கவிதைகளா... இல்லை காவியங்களா...<br>உன்னோடு வாழும் ஒவ்வொரு நொடியும் சிறகுகளா...
+      </p>
+    </div>
+  </header>
+
+  <!-- Video Popup Modal -->
+  <div id="videoModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-dark rounded-3xl p-4 sm:p-6 max-w-2xl w-full border border-rose-500/30 relative text-white space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-rose-800/60 pb-3">
+        <div class="flex items-center space-x-2">
+          <i class="fab fa-youtube text-red-500 text-xl"></i>
+          <h3 class="font-cursive text-xl text-rose-300 font-bold">Nee Kavithaigala Video Song</h3>
+        </div>
+        <button id="closeVideoModal" type="button" class="w-8 h-8 rounded-full bg-rose-600/80 text-white flex items-center justify-center hover:bg-rose-600 transition">&times;</button>
+      </div>
+      <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-inner bg-black border border-rose-900/50">
+        <iframe id="youtubeIframe" class="w-full h-full" src="" title="Nee Kavithaigala Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+        <span class="text-rose-200">Maragatha Naanayam • Pradeep Kumar</span>
+        <a href="https://www.youtube.com/watch?v=gV7dwGnWspE" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold inline-flex items-center space-x-1.5 transition">
+          <i class="fas fa-external-link-alt text-[10px]"></i>
+          <span>Open Direct in YouTube App</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-4 pt-24 space-y-12">
+
+    <section class="text-center space-y-4 pt-4">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-rose-100/80 border border-rose-300 text-rose-700 text-xs font-bold uppercase tracking-wider shadow-sm">
+        <i class="fas fa-sparkles text-rose-500"></i>
+        <span>Special Birthday Dedication</span>
+      </div>
+
+      <h1 class="font-romantic text-5xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 drop-shadow-sm">
+        Happy Birthday, Ananthika! ❤️
+      </h1>
+
+      <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto font-medium">
+        To the most beautiful girl in my world. You are my melody, my favorite poetry, and my happily ever after.
+      </p>
+
+      <div class="glass-card rounded-3xl p-6 shadow-xl border border-rose-200 max-w-2xl mx-auto mt-6 pulse-glow">
+        <p class="text-xs font-bold text-rose-600 uppercase tracking-widest mb-3">
+          <i class="fas fa-clock mr-1"></i> Countdown to Ananthika's Special Day (Oct 27, 2026)
+        </p>
+
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center" id="countdown">
+          <div class="bg-gradient-to-b from-white to-rose-50 rounded-2xl p-2 sm:p-4 border border-rose-100 shadow-inner">
+            <span id="days" class="block font-extrabold text-2xl sm:text-4xl text-rose-600">00</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase">Days</span>
+          </div>
+          <div class="bg-gradient-to-b from-white to-rose-50 rounded-2xl p-2 sm:p-4 border border-rose-100 shadow-inner">
+            <span id="hours" class="block font-extrabold text-2xl sm:text-4xl text-rose-600">00</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase">Hours</span>
+          </div>
+          <div class="bg-gradient-to-b from-white to-rose-50 rounded-2xl p-2 sm:p-4 border border-rose-100 shadow-inner">
+            <span id="minutes" class="block font-extrabold text-2xl sm:text-4xl text-rose-600">00</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase">Mins</span>
+          </div>
+          <div class="bg-gradient-to-b from-white to-rose-50 rounded-2xl p-2 sm:p-4 border border-rose-100 shadow-inner">
+            <span id="seconds" class="block font-extrabold text-2xl sm:text-4xl text-rose-600">00</span>
+            <span class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase">Secs</span>
+          </div>
+        </div>
+
+        <div class="mt-4 flex justify-center space-x-3">
+          <button id="celebrateBtn" type="button" class="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-md hover:shadow-rose-300 hover:scale-105 active:scale-95 transition-all flex items-center space-x-2">
+            <i class="fas fa-heart text-white"></i>
+            <span>Shower Love & Confetti!</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Special Links Section -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Quick Access Links</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">Open Surprise Links 🔗</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Tap any button below to open music, video, or shareable birthday links!</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <!-- Link 1: Watch Video -->
+        <a id="openSongBtn" href="https://www.youtube.com/watch?v=gV7dwGnWspE" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold text-xs sm:text-sm flex items-center justify-between shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fab fa-youtube"></i>
+            </div>
+            <div class="text-left">
+              <div class="font-bold">Watch Video Song</div>
+              <div class="text-[10px] text-rose-100">Open YouTube</div>
+            </div>
+          </div>
+          <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+
+        <!-- Link 2: Spotify / Music -->
+        <a href="https://open.spotify.com/search/Nee%20Kavithaigala" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold text-xs sm:text-sm flex items-center justify-between shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fab fa-spotify"></i>
+            </div>
+            <div class="text-left">
+              <div class="font-bold">Listen on Spotify</div>
+              <div class="text-[10px] text-emerald-100">Open Music Link</div>
+            </div>
+          </div>
+          <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+
+        <!-- Link 3: Copy Celebration Page Link -->
+        <button id="copyPageLinkBtn" type="button" class="p-4 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold text-xs sm:text-sm flex items-center justify-between shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fas fa-link"></i>
+            </div>
+            <div class="text-left">
+              <div class="font-bold">Copy Page Link</div>
+              <div id="copyStatusText" class="text-[10px] text-rose-100">Click to copy URL</div>
+            </div>
+          </div>
+          <i class="fas fa-copy text-xs"></i>
+        </button>
+      </div>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 text-center space-y-6">
+      <div class="space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Interactive Fun</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">Make a Wish & Cut the Cake 🎂</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Tap on all the candle flames to blow them out, then cut your cake!</p>
+      </div>
+
+      <div class="relative max-w-xs mx-auto py-8 flex flex-col items-center justify-center">
+        <!-- Candles -->
+        <div class="flex justify-center space-x-6 mb-1 z-20" id="candlesContainer">
+          <div class="candle flex flex-col items-center cursor-pointer group" onclick="blowCandle(this)">
+            <div class="flame w-3 h-5 bg-gradient-to-t from-yellow-500 via-orange-400 to-amber-200 rounded-full shadow-lg shadow-yellow-300"></div>
+            <div class="w-2 h-10 bg-gradient-to-b from-pink-300 to-pink-400 rounded-sm shadow"></div>
+          </div>
+          <div class="candle flex flex-col items-center cursor-pointer group" onclick="blowCandle(this)">
+            <div class="flame w-3 h-5 bg-gradient-to-t from-yellow-500 via-orange-400 to-amber-200 rounded-full shadow-lg shadow-yellow-300"></div>
+            <div class="w-2 h-10 bg-gradient-to-b from-rose-300 to-rose-400 rounded-sm shadow"></div>
+          </div>
+          <div class="candle flex flex-col items-center cursor-pointer group" onclick="blowCandle(this)">
+            <div class="flame w-3 h-5 bg-gradient-to-t from-yellow-500 via-orange-400 to-amber-200 rounded-full shadow-lg shadow-yellow-300"></div>
+            <div class="w-2 h-10 bg-gradient-to-b from-pink-300 to-pink-400 rounded-sm shadow"></div>
+          </div>
+        </div>
+
+        <!-- Cake Visual -->
+        <div class="relative w-64 z-10" id="cakeElement">
+          <!-- Top Layer -->
+          <div class="h-16 bg-gradient-to-r from-pink-300 via-rose-300 to-pink-300 rounded-t-3xl border-b-4 border-pink-400/50 shadow-inner relative overflow-hidden flex items-center justify-center">
+            <span class="text-xs text-rose-800 font-bold tracking-widest uppercase">Ananthika</span>
+            <div class="absolute top-0 w-full h-3 bg-white/40 rounded-b-full"></div>
+          </div>
+          <!-- Middle Layer -->
+          <div class="h-16 bg-gradient-to-r from-rose-400 via-pink-400 to-rose-400 border-b-4 border-rose-500/50 shadow-inner relative flex items-center justify-center">
+            <span class="text-white text-xs font-cursive font-bold">✨ Happy Birthday ✨</span>
+          </div>
+          <!-- Bottom Plate -->
+          <div class="h-5 bg-slate-200 rounded-b-full shadow-xl border-t border-slate-300 flex items-center justify-center">
+            <div class="w-72 h-2 bg-slate-300/80 rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- Knife Overlay -->
+        <div id="knife" class="hidden absolute top-12 right-4 text-4xl transform -rotate-45 transition-all duration-700 pointer-events-none z-30">
+          🔪
+        </div>
+      </div>
+
+      <div class="flex justify-center space-x-3">
+        <button id="cutCakeBtn" type="button" class="bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all flex items-center space-x-2">
+          <i class="fas fa-utensils"></i>
+          <span>Cut the Birthday Cake!</span>
+        </button>
+      </div>
+      <p id="cakeStatus" class="text-xs text-rose-600 font-semibold h-4"></p>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">From My Heart</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">A Secret Birthday Letter 💌</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Tap the envelope to open your letter, Ananthika.</p>
+      </div>
+
+      <div class="max-w-md mx-auto my-6">
+        <div id="envelope" class="envelope-wrapper cursor-pointer" onclick="openEnvelope()">
+          <div class="relative bg-rose-200 rounded-2xl p-6 shadow-2xl border-2 border-rose-300 text-center overflow-hidden min-h-[220px] flex flex-col justify-center items-center group hover:bg-rose-150 transition">
+            
+            <div id="envelopeFront" class="space-y-3 z-10 transition-all duration-500">
+              <div class="w-16 h-16 rounded-full bg-rose-500 text-white flex items-center justify-center text-2xl mx-auto shadow-lg group-hover:scale-110 transition">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3 class="font-cursive text-2xl text-rose-800 font-bold">To My Dearest Ananthika</h3>
+              <p class="text-xs text-rose-600 font-medium">Click to unlock & read...</p>
+            </div>
+
+            <!-- Opened Letter Content -->
+            <div id="letterContent" class="hidden text-left space-y-4 bg-amber-50/90 p-6 rounded-xl border border-amber-200 shadow-inner text-slate-800 z-20 w-full animate-fade-in">
+              <div class="flex justify-between items-center border-b border-amber-200 pb-2">
+                <span class="font-cursive text-xl font-bold text-rose-700">Dearest Ananthika,</span>
+                <span class="text-[10px] text-amber-700 font-semibold">27th October</span>
+              </div>
+              <p class="text-xs sm:text-sm leading-relaxed text-slate-700">
+                Yen chella kutty ku happy birthday! Thanks for being with me for this whole year. Ithana naal en kooda irundha oruu oruu naalum sandhoshama irundhuchu. Indha sandhoshatha life full ahh kuduka life full ahh yen kooda vaa, love you so much! ❤️
+              </p>
+              <p class="text-xs sm:text-sm leading-relaxed text-slate-700">
+                Thank you for being my support and happiness. I love you to the moon and back 😘
+                bujukku bujukku bujukku
+              </p>
+              <div class="text-right pt-2 border-t border-amber-200">
+                <p class="font-cursive text-lg text-rose-700 font-bold">Forever Yours ❤️</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Our Memories</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">Our Story & Precious Moments 📸</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Flip through all 14 memory cards dedicated to you.</p>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="relative max-w-lg mx-auto">
+        <div id="memoryCards" class="relative h-96 sm:h-[28rem] w-full flex items-center justify-center">
+          <!-- Injected via JavaScript dynamically for all 14 photos -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center mt-4 px-4">
+          <button id="prevCardBtn" type="button" class="w-10 h-10 rounded-full bg-white text-rose-600 shadow-md flex items-center justify-center hover:bg-rose-50 transition active:scale-95">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span id="cardIndicator" class="text-xs font-bold text-rose-700">1 / 14</span>
+          <button id="nextCardBtn" type="button" class="w-10 h-10 rounded-full bg-white text-rose-600 shadow-md flex items-center justify-center hover:bg-rose-50 transition active:scale-95">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Reasons To Love You</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">10 Things I Love About Ananthika 💕</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Click on any card to flip and reveal a sweet reason!</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3" id="reasonsGrid">
+        <!-- Injected via script safely -->
+      </div>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6 text-center">
+      <div class="space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Birthday Coupon</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">Scratch To Reveal Your Gift 🎟️</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Use your finger or mouse to scratch the silver layer!</p>
+      </div>
+
+      <div class="relative w-72 h-44 mx-auto rounded-2xl overflow-hidden shadow-2xl border-2 border-rose-300">
+        <!-- Coupon Background -->
+        <div class="absolute inset-0 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 p-4 flex flex-col justify-center items-center text-white text-center">
+          <i class="fas fa-gift text-3xl text-gold-400 mb-1 animate-bounce"></i>
+          <h3 class="font-bold text-base">SPECIAL BIRTHDAY DATE COUPON</h3>
+          <p class="text-xs mt-1 text-rose-100 font-medium">Valid for: <span class="text-yellow-300 font-bold"> Romantic, joyful, lustful and happiest days for the rest of your life! 🕯️✨</span></p>
+          <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded-full mt-2">Redeemable Anytime by Ananthika</span>
+        </div>
+
+        <!-- Scratch Canvas Overlay -->
+        <canvas id="scratchCanvas" width="288" height="176" class="absolute inset-0 z-10"></canvas>
+      </div>
+      <p class="text-xs text-rose-600 italic">Keep scratching to reveal!</p>
+    </section>
+
+    <section class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl border border-rose-200 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Interactive Wish Wall</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-rose-900 font-cursive">Leave a Birthday Note ✍️</h2>
+        <p class="text-xs sm:text-sm text-slate-600">Ananthika, write a wish or reply note here!</p>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-4">
+        <textarea id="userWishInput" rows="3" placeholder="Write your birthday wish or message..." class="w-full rounded-2xl border border-rose-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 glass-card"></textarea>
+        
+        <button id="sendWishBtn" type="button" class="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-sm py-3 rounded-2xl shadow-md hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center space-x-2">
+          <i class="fas fa-paper-plane"></i>
+          <span>Post Wish to Wall</span>
+        </button>
+
+        <!-- Messages List -->
+        <div id="wishWall" class="space-y-2 pt-4">
+          <div class="bg-white/80 p-3 rounded-xl border border-rose-200 text-xs text-slate-700 shadow-sm flex items-start space-x-2">
+            <i class="fas fa-heart text-rose-500 mt-0.5"></i>
+            <div>
+              <span class="font-bold text-rose-800">You: </span>
+              <span>"Wishing you the happiest birthday full of joy and love, Ananthika! ❤️"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-6 text-xs text-rose-700 font-medium space-y-1">
+      <p>Made with ❤️ especially for Ananthika</p>
+      <p class="text-[10px] text-rose-500">Featuring "Nee Kavithaigala" • Maragatha Naanayam</p>
+    </footer>
+
+  </main>
+
+  <!-- Audio Element -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="nee_kavithaigala.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-ambient-112199.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const birthdayDate = new Date('October 27, 2026 00:00:00').getTime();
+    let isPlaying = false;
+    let candlesBlown = 0;
+    let activeCardIndex = 0;
+
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let particles = [];
+    let confettiParticles = [];
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        if (!canvas) return;
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 20;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = Math.random() * 1.5 + 0.5;
+        this.speedX = Math.sin(Math.random() * Math.PI) * 0.8;
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.isHeart = Math.random() > 0.4;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -20) this.reset();
+      }
+      draw() {
+        if (!ctx) return;
+        ctx.fillStyle = `rgba(244, 63, 94, ${this.opacity})`;
+        if (this.isHeart) {
+          ctx.font = `${this.size}px serif`;
+          ctx.fillText('❤️', this.x, this.y);
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size / 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    class Confetti {
+      constructor(x, y) {
+        if (!canvas) return;
+        this.x = x !== undefined ? x : canvas.width / 2;
+        this.y = y !== undefined ? y : canvas.height / 2;
+        this.size = Math.random() * 8 + 6;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 12 + 4;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed - 3;
+        this.gravity = 0.25;
+        this.friction = 0.96;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = (Math.random() - 0.5) * 12;
+        this.opacity = 1;
+        this.decay = Math.random() * 0.015 + 0.01;
+        const colors = ['#f43f5e', '#fb7185', '#fda4af', '#facc15', '#eab308', '#a855f7', '#38bdf8', '#ffffff'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.shape = Math.random() > 0.5 ? 'heart' : (Math.random() > 0.5 ? 'circle' : 'rect');
+      }
+      update() {
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotationSpeed;
+        this.opacity -= this.decay;
+      }
+      draw() {
+        if (!ctx || this.opacity <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+
+        if (this.shape === 'heart') {
+          ctx.font = `${this.size * 1.5}px serif`;
+          ctx.fillText('❤️', -this.size / 2, this.size / 2);
+        } else if (this.shape === 'circle') {
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+        }
+        ctx.restore();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 30; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      for (let i = confettiParticles.length - 1; i >= 0; i--) {
+        const c = confettiParticles[i];
+        c.update();
+        c.draw();
+        if (c.opacity <= 0 || c.y > canvas.height + 50) {
+          confettiParticles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    function triggerConfetti(originX, originY) {
+      if (!canvas) return;
+      const startX = originX !== undefined ? originX : canvas.width / 2;
+      const startY = originY !== undefined ? originY : canvas.height / 3;
+      for (let i = 0; i < 90; i++) {
+        confettiParticles.push(new Confetti(startX, startY));
+      }
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = birthdayDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days').innerText = "00";
+        document.getElementById('hours').innerText = "00";
+        document.getElementById('minutes').innerText = "00";
+        document.getElementById('seconds').innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    const audio = document.getElementById('bgAudio');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const muteBtn = document.getElementById('muteBtn');
+    const muteIcon = document.getElementById('muteIcon');
+    const lyricsBtn = document.getElementById('lyricsBtn');
+    const lyricsDrawer = document.getElementById('lyricsDrawer');
+    const closeLyrics = document.getElementById('closeLyrics');
+
+    if (playBtn) {
+      playBtn.addEventListener('click', toggleAudio);
+    }
+
+    function toggleAudio() {
+      if (!audio) return;
+      if (isPlaying) {
+        audio.pause();
+        if (playIcon) playIcon.className = "fas fa-play text-sm ml-0.5";
+      } else {
+        audio.play().then(() => {
+          if (playIcon) playIcon.className = "fas fa-pause text-sm";
+        }).catch(e => console.log('Audio playback pending interaction'));
+      }
+      isPlaying = !isPlaying;
+    }
+
+    if (muteBtn && audio) {
+      muteBtn.addEventListener('click', () => {
+        audio.muted = !audio.muted;
+        if (muteIcon) muteIcon.className = audio.muted ? "fas fa-volume-mute text-xs" : "fas fa-volume-up text-xs";
+      });
+    }
+
+    if (lyricsBtn && lyricsDrawer) {
+      lyricsBtn.addEventListener('click', () => lyricsDrawer.classList.toggle('hidden'));
+    }
+    if (closeLyrics && lyricsDrawer) {
+      closeLyrics.addEventListener('click', () => lyricsDrawer.classList.add('hidden'));
+    }
+
+    const celebrateBtn = document.getElementById('celebrateBtn');
+    if (celebrateBtn) {
+      celebrateBtn.addEventListener('click', () => {
+        triggerConfetti();
+        if (!isPlaying) toggleAudio();
+      });
+    }
+
+    function blowCandle(element) {
+      const flame = element.querySelector('.flame');
+      if (flame && flame.style.display !== 'none') {
+        flame.style.display = 'none';
+        candlesBlown++;
+        const status = document.getElementById('cakeStatus');
+        if (status) status.innerText = `Blew out candle ${candlesBlown} of 3! ✨`;
+        if (candlesBlown === 3) {
+          if (status) status.innerText = "All candles blown out! Now click 'Cut the Cake' 🎉";
+          triggerConfetti();
+        }
+      }
+    }
+
+    const cutCakeBtn = document.getElementById('cutCakeBtn');
+    if (cutCakeBtn) {
+      cutCakeBtn.addEventListener('click', () => {
+        const knife = document.getElementById('knife');
+        const cakeStatus = document.getElementById('cakeStatus');
+        
+        if (knife) {
+          knife.classList.remove('hidden');
+          knife.style.transform = 'translate(-60px, 40px) rotate(-45deg)';
+          
+          setTimeout(() => {
+            knife.style.transform = 'translate(-60px, 100px) rotate(-10deg)';
+          }, 400);
+
+          setTimeout(() => {
+            knife.classList.add('hidden');
+            if (cakeStatus) cakeStatus.innerText = "YAY! Cake cut successfully! Happy Birthday Ananthika! 🍰❤️";
+            triggerConfetti();
+          }, 1000);
+        }
+      });
+    }
+
+    function openEnvelope() {
+      const front = document.getElementById('envelopeFront');
+      const letter = document.getElementById('letterContent');
+      if (front) front.classList.add('hidden');
+      if (letter) letter.classList.remove('hidden');
+      triggerConfetti();
+    }
+
+    /* 14 Memories Photo Gallery / Carousel Array */
+    const photos = [
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM.jpeg', quote: '"Unnodu irukkum ovvoru nodiyum azhagu..." ✨', text: 'My favorite smile in the whole universe. You make my world complete! ❤️' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (1).jpeg', quote: '"Nee thaan en kavithai, en santhosham..." 💕', text: 'Every second spent with you feels like a dream I never want to wake up from. 😘' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (2).jpeg', quote: '"En idhayathin devadhai..." 🌹', text: 'Thank you for bringing so much brightness, love, and magic into my life!' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (3).jpeg', quote: '"Un sirippil naan tholaindhu ponen..." ✨', text: 'Looking into your eyes is like looking at my entire future.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (4).jpeg', quote: '"Unnodu vazhum vazhve varam..." 💖', text: 'Life with you is an adventure filled with continuous laughter and warmth.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (5).jpeg', quote: '"En Chella Kutty..." 🥰', text: 'Nothing in this world compares to your sweetness and affection.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (6).jpeg', quote: '"Yennodu Nee..." 🎶', text: 'You are the rhythm in my heart and the music in my life.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (7).jpeg', quote: '"Forever & Always..." ❤️', text: 'Hand in hand, heart to heart, today, tomorrow and always.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (8).jpeg', quote: '"En Anbe Ananthika..." 🌸', text: 'Your loving nature brings so much peace to my soul.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (9).jpeg', quote: '"Making Every Moment Count..." 💫', text: 'Every day with you is my new favorite day.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (10).jpeg', quote: '"You & Me Forever..." 💏', text: 'My safest place and happiest home is in your arms.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (11).jpeg', quote: '"Pure Joy with You..." 😊', text: 'Your laughter is the sweetest sound in the universe.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (12).jpeg', quote: '"To Infinity and Beyond..." 🚀', text: 'Growing together with you is my ultimate privilege.' },
+      { src: 'WhatsApp Image 2026-10-23 at 11.17.11 PM (13).jpeg', quote: '"Happy Birthday My Queen!" 👑❤️', text: 'Wishing you all the unconditional love and joy in the universe!' }
+    ];
+
+    const memoryCardsContainer = document.getElementById('memoryCards');
+    const indicator = document.getElementById('cardIndicator');
+
+    function renderMemoryCards() {
+      if (!memoryCardsContainer) return;
+      memoryCardsContainer.innerHTML = '';
+
+      photos.forEach((photo, idx) => {
+        const card = document.createElement('div');
+        card.className = `memory-card absolute w-full h-full rounded-2xl glass-card border border-rose-300 p-4 shadow-xl flex flex-col justify-between transition-all duration-500 transform ${idx === 0 ? 'scale-100 opacity-100 z-20' : 'scale-95 opacity-0 z-0'}`;
+        
+        card.innerHTML = `
+          <div class="h-64 sm:h-72 w-full rounded-xl overflow-hidden border border-rose-200 shadow-inner relative group bg-rose-100/50 flex items-center justify-center">
+            <img src="${photo.src}" alt="Ananthika Precious Moment ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'flex flex-col items-center justify-center h-full text-rose-500 p-4 text-center\\'><i class=\\'fas fa-heart text-4xl mb-2 animate-bounce\\'></i><span class=\\'font-cursive text-lg font-bold\\'>Precious Moment #${idx + 1}</span><p class=\\'text-xs text-rose-700 font-medium mt-1\\'>${photo.quote}</p></div>';">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3 pointer-events-none">
+              <span class="text-white font-cursive text-lg sm:text-xl drop-shadow">${photo.quote}</span>
+            </div>
+          </div>
+          <div class="p-2 text-center">
+            <span class="text-xs font-bold text-rose-600 block uppercase tracking-wider">Precious Moment #${idx + 1}</span>
+            <p class="text-xs sm:text-sm text-slate-700 font-medium mt-1 truncate">${photo.text}</p>
+          </div>
+        `;
+        memoryCardsContainer.appendChild(card);
+      });
+      if (indicator) indicator.innerText = `1 / ${photos.length}`;
+    }
+
+    function updateCarousel() {
+      const cards = document.querySelectorAll('.memory-card');
+      cards.forEach((card, idx) => {
+        if (idx === activeCardIndex) {
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+          card.style.zIndex = '20';
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          card.style.zIndex = '0';
+        }
+      });
+      if (indicator) indicator.innerText = `${activeCardIndex + 1} / ${cards.length}`;
+    }
+
+    const prevCardBtn = document.getElementById('prevCardBtn');
+    const nextCardBtn = document.getElementById('nextCardBtn');
+    if (prevCardBtn) {
+      prevCardBtn.addEventListener('click', () => {
+        activeCardIndex = (activeCardIndex - 1 + photos.length) % photos.length;
+        updateCarousel();
+      });
+    }
+    if (nextCardBtn) {
+      nextCardBtn.addEventListener('click', () => {
+        activeCardIndex = (activeCardIndex + 1) % photos.length;
+        updateCarousel();
+      });
+    }
+
+    /* Render 10 Reasons Flip Cards */
+    const reasons = [
+      "Because its you",
+      "I said because its you",
+      "Why! didn't you beleive me",
+      "You don't belive me right",
+      "I'm telling the truth",
+      "Ohh my god",
+      "Ok i'm gonna tell the truth",
+      "flip the next card",
+      "You are my wife AND",
+      "I LOVE YOU ❤️"
+    ];
+
+    const reasonsGrid = document.getElementById('reasonsGrid');
+    if (reasonsGrid) {
+      reasonsGrid.innerHTML = '';
+      reasons.forEach((reason, index) => {
+        const cardWrapper = document.createElement('div');
+        cardWrapper.className = "flip-card h-28 cursor-pointer select-none";
+        
+        cardWrapper.innerHTML = `
+          <div class="flip-card-inner shadow-md rounded-2xl">
+            <div class="flip-card-front glass-card border border-rose-200 flex flex-col items-center justify-center p-2 text-center bg-gradient-to-br from-white to-rose-50">
+              <span class="w-7 h-7 rounded-full bg-rose-100 text-rose-600 font-bold text-xs flex items-center justify-center mb-1 shadow-sm">#${index + 1}</span>
+              <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wide">Tap to reveal</span>
+            </div>
+            <div class="flip-card-back flex items-center justify-center p-3 text-center bg-gradient-to-br from-rose-500 via-pink-500 to-rose-600 text-white font-bold text-xs shadow-lg border border-rose-400">
+              ${reason}
+            </div>
+          </div>
+        `;
+
+        cardWrapper.addEventListener('click', function() {
+          this.classList.toggle('flipped');
+        });
+
+        reasonsGrid.appendChild(cardWrapper);
+      });
+    }
+
+    /* Scratch Canvas Logic */
+    const scratchCanvas = document.getElementById('scratchCanvas');
+    const scratchCtx = scratchCanvas ? scratchCanvas.getContext('2d') : null;
+    let isScratching = false;
+
+    function initScratchCard() {
+      if (!scratchCtx || !scratchCanvas) return;
+      scratchCtx.fillStyle = '#cbd5e1';
+      scratchCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+      scratchCtx.fillStyle = '#64748b';
+      scratchCtx.font = 'bold 14px Plus Jakarta Sans, sans-serif';
+      scratchCtx.textAlign = 'center';
+      scratchCtx.fillText('Scratch Here with Finger/Mouse! ✨', scratchCanvas.width / 2, scratchCanvas.height / 2);
+    }
+
+    function getScratchPos(e) {
+      if (!scratchCanvas) return { x: 0, y: 0 };
+      const rect = scratchCanvas.getBoundingClientRect();
+      let clientX = e.clientX;
+      let clientY = e.clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      }
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function scratch(e) {
+      if (!isScratching || !scratchCtx) return;
+      if (e) e.preventDefault();
+      const pos = getScratchPos(e);
+      scratchCtx.globalCompositeOperation = 'destination-out';
+      scratchCtx.beginPath();
+      scratchCtx.arc(pos.x, pos.y, 18, 0, Math.PI * 2);
+      scratchCtx.fill();
+    }
+
+    if (scratchCanvas) {
+      scratchCanvas.addEventListener('mousedown', () => isScratching = true);
+      scratchCanvas.addEventListener('mouseup', () => isScratching = false);
+      scratchCanvas.addEventListener('mousemove', scratch);
+
+      scratchCanvas.addEventListener('touchstart', () => isScratching = true);
+      scratchCanvas.addEventListener('touchend', () => isScratching = false);
+      scratchCanvas.addEventListener('touchmove', scratch);
+    }
+
+    /* Wish Wall Posting */
+    const sendWishBtn = document.getElementById('sendWishBtn');
+    if (sendWishBtn) {
+      sendWishBtn.addEventListener('click', () => {
+        const input = document.getElementById('userWishInput');
+        const wishWall = document.getElementById('wishWall');
+        if (input && wishWall && input.value.trim() !== '') {
+          const userText = input.value.trim();
+          
+          const newWishCard = document.createElement('div');
+          newWishCard.className = "bg-white/80 p-3 rounded-xl border border-rose-200 text-xs text-slate-700 shadow-sm flex items-start space-x-2 animate-fade-in";
+          
+          const heartIcon = document.createElement('i');
+          heartIcon.className = "fas fa-heart text-rose-500 mt-0.5";
+          
+          const contentContainer = document.createElement('div');
+          const authorSpan = document.createElement('span');
+          authorSpan.className = "font-bold text-rose-800";
+          authorSpan.textContent = "Ananthika: ";
+          
+          const messageSpan = document.createElement('span');
+          messageSpan.textContent = `"${userText}"`;
+          
+          contentContainer.appendChild(authorSpan);
+          contentContainer.appendChild(messageSpan);
+          
+          newWishCard.appendChild(heartIcon);
+          newWishCard.appendChild(contentContainer);
+          
+          wishWall.insertBefore(newWishCard, wishWall.firstChild);
+          input.value = '';
+          triggerConfetti();
+        }
+      });
+    }
+
+    /* Video Modal Logic */
+    const openVideoModalBtn = document.getElementById('openVideoModalBtn');
+    const videoModal = document.getElementById('videoModal');
+    const closeVideoModal = document.getElementById('closeVideoModal');
+    const youtubeIframe = document.getElementById('youtubeIframe');
+
+    /* Music Modal & Custom Song Logic */
+    const musicModal = document.getElementById('musicModal');
+    const openMusicModalBtn = document.getElementById('openMusicModalBtn');
+    const closeMusicModal = document.getElementById('closeMusicModal');
+    const localAudioInput = document.getElementById('localAudioInput');
+    const customAudioUrl = document.getElementById('customAudioUrl');
+    const applyUrlBtn = document.getElementById('applyUrlBtn');
+
+    if (openMusicModalBtn && musicModal) {
+      openMusicModalBtn.addEventListener('click', () => musicModal.classList.remove('hidden'));
+    }
+    if (closeMusicModal && musicModal) {
+      closeMusicModal.addEventListener('click', () => musicModal.classList.add('hidden'));
+    }
+
+    function changeAudioSource(srcUrl, title, artist) {
+      if (!audio) return;
+      audio.src = srcUrl;
+      audio.load();
+      audio.play().then(() => {
+        isPlaying = true;
+        if (playIcon) playIcon.className = "fas fa-pause text-sm";
+      }).catch(e => console.log('Audio autoplay prevented'));
+
+      // Update Header Text
+      const songTitleEl = document.querySelector('header h4');
+      const songArtistEl = document.querySelector('header p');
+      if (songTitleEl) songTitleEl.innerText = title;
+      if (songArtistEl) songArtistEl.innerText = artist;
+
+      if (musicModal) musicModal.classList.add('hidden');
+    }
+
+    // Load Local Audio File from user device
+    if (localAudioInput) {
+      localAudioInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const fileUrl = URL.createObjectURL(file);
+          const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+          changeAudioSource(fileUrl, nameWithoutExt, "Local Audio File 🎵");
+        }
+      });
+    }
+
+    // Load URL Audio
+    if (applyUrlBtn && customAudioUrl) {
+      applyUrlBtn.addEventListener('click', () => {
+        const url = customAudioUrl.value.trim();
+        if (url) {
+          changeAudioSource(url, "Custom Web Track", "Custom URL Link");
+        }
+      });
+    }
+
+    function openVideoPopup() {
+      if (videoModal && youtubeIframe) {
+        youtubeIframe.src = "https://www.youtube.com/embed/gV7dwGnWspE?autoplay=1";
+        videoModal.classList.remove('hidden');
+        if (audio && isPlaying) {
+          audio.pause();
+          isPlaying = false;
+          if (playIcon) playIcon.className = "fas fa-play text-sm ml-0.5";
+        }
+      }
+    }
+
+    function closeVideoPopup() {
+      if (videoModal && youtubeIframe) {
+        youtubeIframe.src = "";
+        videoModal.classList.add('hidden');
+      }
+    }
+
+    if (openVideoModalBtn) openVideoModalBtn.addEventListener('click', openVideoPopup);
+    if (closeVideoModal) closeVideoModal.addEventListener('click', closeVideoPopup);
+
+    /* Copy Page Link Listener */
+    const copyPageLinkBtn = document.getElementById('copyPageLinkBtn');
+    const copyStatusText = document.getElementById('copyStatusText');
+    if (copyPageLinkBtn) {
+      copyPageLinkBtn.addEventListener('click', () => {
+        const dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        if (copyStatusText) {
+          copyStatusText.innerText = "Link copied! ❤️";
+          setTimeout(() => {
+            copyStatusText.innerText = "Click to copy URL";
+          }, 2500);
+        }
+      });
+    }
+
+    window.onload = function() {
+      initParticles();
+      animateParticles();
+      renderMemoryCards();
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      initScratchCard();
+      triggerConfetti();
+    };
+  </script>
+</body>
+</html>
